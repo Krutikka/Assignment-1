@@ -1,0 +1,32 @@
+Test case ID:TC Login_01
+
+from selenium import webdriver
+import time
+
+#set up the webdriver (make sure to have driver executable path)
+driver = webdriver.Chrome()
+
+#open the OrangeHRM portal
+driver.get("https://your-orangehrm-url.com")
+
+# find the login 
+username_field = driver.find_element_by_id("txtUsername")
+password_field = driver.find_element_by_id("txtPassword")
+login_button = driver.find_element_by_id("btnLogin")
+
+#Enter the login credentials and click the login button
+username_field.send_keys("admin")
+password_field.send_keys("admin123")
+login_button.click()
+
+#wait for a while to let the page load
+time.sleep(5)
+
+#check if the login was sucessful by verifiying the user dashboard or a relevant element
+if "dashboard" in driver.current_url:
+    print("login sucessful!")
+else:
+    print("login failed!")
+    
+#close the browser
+driver.quit()
